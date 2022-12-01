@@ -1,0 +1,40 @@
+<form class="forma" [formGroup]="commentForm" (submit)="submitTextArea()">
+
+  <div class="chBox">
+    <label><input type="checkbox" [(ngModel)]="image" [ngModelOptions]="{standalone:true}">Image</label><code>{{changeValue(image)}}</code>
+    <label style="padding-left: 10px"><input type="checkbox" [(ngModel)]="abstract" [ngModelOptions]="{standalone:true}">Abstract</label><code>{{changeValue(abstract)}}</code>
+    <label style="padding-left: 10px"><input type="checkbox" [(ngModel)]="categories" [ngModelOptions]="{standalone:true}">Categories</label><code>{{changeValue(categories)}}</code>
+  </div>
+
+  <div class="form-outline">
+    <textarea class="form-control" id="textArea" rows="4" [formControlName]="'textArea'" [(ngModel)]="textArea"></textarea>
+    <div class="error-message text-danger" *ngIf="commentForm.get('textArea')?.errors?.required"> Text is required! </div>
+    <label class="form-label" for="textArea"></label>
+  </div>
+
+  <div class="slidecontainer">
+    <input type="range" min="0" max="1" value="0.6" step="0.1" [(ngModel)]="slider" [ngModelOptions]="{standalone:true}" class="slider" id="myRange">
+  </div>
+
+  <div class="button">
+    <button [disabled]="!commentForm.valid" type="submit" class="btn btn-primary">Submit</button>
+  </div>
+
+</form>
+
+<div class="response">
+  <div *ngIf="entities" class="mb-2">
+    <div *ngFor="let result of entities.annotations" class="mb-2">
+      <div *ngIf="result">
+        <p>{{result.abstract}}</p>
+        <div *ngFor="let category of result.categories">
+          <p><b>{{category}}</b></p>
+        </div>
+        <div *ngIf="result.image">
+          <img src="{{result.image.thumbnail}}">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

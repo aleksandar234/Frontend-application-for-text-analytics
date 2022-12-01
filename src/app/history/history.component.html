@@ -1,0 +1,6 @@
+<div>
+  <h2>History of calls:</h2>
+  <div *ngFor="let call of historyOfCalls; let i=index" class="mb-2">
+    <p>[{{allDates[i] | date: 'dd.MM.YYYY. H:mm:ss'}}] {{ call }}</p>
+  </div>
+</div>

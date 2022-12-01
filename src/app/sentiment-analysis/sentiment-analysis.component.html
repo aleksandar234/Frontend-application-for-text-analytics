@@ -1,0 +1,33 @@
+<form [formGroup]="commentForm" (submit)="submitButton()">
+
+  <div class="form-group">
+
+    <input type="checkbox" name="test" [checked]="currentlyChecked === check_box_type.ENGLISH" (click)="selectCheckBox(check_box_type.ENGLISH)">English
+    <input type="checkbox" name="test" [checked]="currentlyChecked === check_box_type.ITALIAN" (click)="selectCheckBox(check_box_type.ITALIAN)">Italian
+
+    <label for="userText"></label>
+    <textarea class="form-control" id="userText" rows="3" [formControlName]="'userText'" [(ngModel)]="userText"></textarea>
+    <div class="error-message text-danger" *ngIf="commentForm.get('textArea')?.errors?.required"> Text is required! </div>
+    <div class="button">
+      <button [disabled]="!commentForm.valid" type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>
+
+<div>
+  <div *ngIf="analysisResults" class="mb-2">
+    <p>{{analysisResults.lang}}</p>
+    <div *ngIf="analysisResults.sentiment">
+      <p><b>{{analysisResults.sentiment.type}}</b></p>
+      <p><b>{{analysisResults.sentiment.score}}</b></p>
+      <p>rgb:({{interpolateColor(analysisResults.sentiment.score)}})</p>
+    </div>
+    <div *ngIf="finalColor">
+      <div class="card" style="width: 18rem;background-color: rgb({{finalColor[0]}}, {{finalColor[1]}}, 0);color: rgb({{finalColor[0]}}, {{finalColor[1]}}, 0);">
+        <div class="card-body">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

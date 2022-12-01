@@ -1,0 +1,27 @@
+<h2>Language Detection:</h2>
+
+<div>
+  <label><input type="checkbox" [(ngModel)]="clean">CheckBox</label>
+  <code>{{changeValue(clean)}}</code>
+</div>
+
+
+<form [formGroup]="commentForm" (submit)="submitTextArea()">
+
+  <div class="form-outline">
+    <textarea class="form-control" id="textArea" rows="4" [formControlName]="'textArea'" [(ngModel)]="textArea"></textarea>
+    <div class="error-message text-danger" *ngIf="commentForm.get('textArea')?.errors?.required"> Text is required! </div>
+    <label class="form-label" for="textArea">Text1</label>
+  </div>
+  <div class="button">
+    <button [disabled]="!commentForm.valid" type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+
+<div>
+  <div *ngIf="languages" class="mb-2">
+    <div *ngFor="let res of languages.detectedLangs" class="mb-2">
+      <p>Language: <b><i>{{ res.lang }}</i></b>, Confidence: <b><i>{{ res.confidence }}</i></b> </p>
+    </div>
+  </div>
+</div>

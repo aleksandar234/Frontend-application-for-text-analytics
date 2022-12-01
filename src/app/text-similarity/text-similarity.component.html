@@ -1,0 +1,25 @@
+
+<h2>Text Similarity:</h2>
+<form [formGroup]="commentForm" (submit)="setBothUserTexts()">
+  <div class="form-outline">
+    <textarea class="form-control" id="textAreaExample2" rows="4" [formControlName]="'userText1'" [(ngModel)]="userText1"></textarea>
+    <div class="error-message text-danger" *ngIf="commentForm.get('userText1')?.errors?.required"> Text1 is required! </div>
+    <label class="form-label" for="textAreaExample2">Text1</label>
+  </div>
+  <div class="form-outline">
+    <textarea class="form-control" id="textAreaExample3" rows="4" [formControlName]="'userText2'" [(ngModel)]="userText2"></textarea>
+    <div class="error-message text-danger" *ngIf="commentForm.get('userText2')?.errors?.required"> Text2 is required! </div>
+    <label class="form-label" for="textAreaExample3">Text2</label>
+  </div>
+  <div class="button">
+    <button [disabled]="!commentForm.valid" type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+
+
+<div>
+  <div *ngIf="similarities" class="mb-2">
+    <p>{{ this.similarities.lang }}</p>
+    <p>{{ this.similarities.similarity }}</p>
+  </div>
+</div>

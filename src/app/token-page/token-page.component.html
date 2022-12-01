@@ -1,0 +1,16 @@
+<div>
+  <div>
+    <form (submit)="setToken()" class="mb-5">
+      <div class="form-group mb-2">
+        <label for="token">TokenIdentifier</label>
+        <input type="text" class="form-control" id="token" name="name" [(ngModel)]="token" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <form (submit)="removeToken()" class="mb-5">
+      <button type="submit" class="btn btn-primary">RemoveToken</button>
+    </form>
+  </div>
+</div>
